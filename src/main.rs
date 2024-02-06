@@ -1,5 +1,9 @@
 use once_cell::sync::Lazy;
 
+trait Animal {
+    async fn meow(&self);
+}
+
 cfg_if::cfg_if! {
     if #[cfg(feature = "cat")] {
         
@@ -8,7 +12,7 @@ cfg_if::cfg_if! {
         });
 
         struct Cat {}
-        impl Cat {
+        impl Animal for Cat {
             async fn meow(&self) {
                 println!("Cat meow");
             }
@@ -25,7 +29,7 @@ cfg_if::cfg_if! {
         });
 
         struct Dog {}
-        impl Dog {
+        impl Animal for Dog {
             async fn meow(&self) {
                 println!("Dog meow");
             }
